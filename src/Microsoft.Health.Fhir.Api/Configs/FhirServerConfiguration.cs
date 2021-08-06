@@ -3,6 +3,7 @@
 // Licensed under the MIT License (MIT). See LICENSE in the repo root for license information.
 // -------------------------------------------------------------------------------------------------
 
+using System;
 using Microsoft.Health.Api.Configuration;
 using Microsoft.Health.Api.Features.Cors;
 using Microsoft.Health.Core.Configs;
@@ -12,7 +13,7 @@ namespace Microsoft.Health.Fhir.Api.Configs
 {
     public class FhirServerConfiguration : IApiConfiguration
     {
-        public string PathBase { get; set; } = string.Empty;
+        public string PathBase { get; set; } = GetPathBase();
 
         public FeatureConfiguration Features { get; } = new FeatureConfiguration();
 
@@ -31,5 +32,11 @@ namespace Microsoft.Health.Fhir.Api.Configs
         public ThrottlingConfiguration Throttling { get; } = new ThrottlingConfiguration();
 
         public ArtifactStoreConfiguration ArtifactStore { get; } = new ArtifactStoreConfiguration();
+
+        public static string GetPathBase()
+        {
+            string pathBase = Environment.GetEnvironmentVariable("PATH_BASE");
+            return pathBase;
+        }
     }
 }

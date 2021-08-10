@@ -33,7 +33,7 @@ namespace Microsoft.Health.Fhir.Api.Configs
 
         public ArtifactStoreConfiguration ArtifactStore { get; } = new ArtifactStoreConfiguration();
 
-        public static string GetPathBase()
+        private static string GetPathBase()
         {
             string pathBase = Environment.GetEnvironmentVariable("PATH_BASE");
             return pathBase;
